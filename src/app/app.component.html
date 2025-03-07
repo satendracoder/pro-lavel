@@ -1,2 +1,4 @@
-
+<textarea [(ngModel)]="sourceCode"></textarea>
+<button (click)="compile()">Compile</button>
+<pre>{{ output }}</pre>
 <router-outlet />

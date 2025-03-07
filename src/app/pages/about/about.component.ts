@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { FileUtils } from '../../core/utils/FileUtils';
 
 @Component({
   selector: 'app-about',
@@ -10,23 +11,33 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './about.component.scss'
 })
 export class AboutComponent {
+  cCode: string = `#include <stdio.h>\nint main() {\n  printf("Hello, World!\\n");\n  return 0;\n}`;
+  output: string = '';
 
+  compileAndRun() {
+    this.output = ''; // Reset output
+    if (!this.cCode.includes('#include <stdio.h>')) {
+      this.output = 'Error: Missing #include <stdio.h>';
+      return;
+    }
+    if (!this.cCode.includes('int main()')) {
+      this.output = 'Error: Missing int main() function';
+      return;
+    }
 
-  title:String = '';
-  url:string="";
-  username:String = '';
+    // Simulate printf output
+    const printfRegex = /printf\("(.*?)\\n?"\);/g;
+    let match;
+    while ((match = printfRegex.exec(this.cCode)) !== null) {
+      this.output += match[1] + '\n';
+    }
 
-  constructor(){
-    this.title = "Ravendra Hero";
-    this.url="https://www.restoftech.com/assets/images/montor/rishi.png";
+    if (this.output === '') {
+      this.output = 'Compilation successful, but no output.';
+    }
   }
-  ngOnInit(): void {
-    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
-    //Add 'implements OnInit' to the class.
-    
-  }
 
-  getValue(){
-    this.username = "Redmi"
+  downloadCode() {
+    FileUtils.downloadFile('program.c', this.cCode);
   }
 }

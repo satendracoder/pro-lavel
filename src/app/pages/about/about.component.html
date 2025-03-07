@@ -1,12 +1,13 @@
-<div class="content">
-    <h1>{{title}}</h1>
-
-    <h2>
-        [property]="expression"
-    </h2>
-    <img [src]="url" alt="">
-    <br>
-    <input type="text" [(ngModel)]="username" (click)="getValue()">
-
-    <p>Get Data {{username}}</p>
-</div>
+<div class="compiler-container">
+    <h2>C Compiler (Simulated)</h2>
+    <textarea [(ngModel)]="cCode" rows="10" cols="50"></textarea>
+    <br />
+    <button (click)="compileAndRun()">Compile & Run</button>
+    <button (click)="downloadCode()">Download C File</button>
+  
+    <div class="output-box">
+      <h3>Output:</h3>
+      <pre>{{ output }}</pre>
+    </div>
+  </div>
+  

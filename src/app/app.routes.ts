@@ -5,7 +5,7 @@ import { GrowthComponent } from './pages/growth/growth.component';
 
 export const routes: Routes = [
 
-    {path:'', redirectTo:'login', pathMatch:'full'},
+    // {path:'', redirectTo:'login', pathMatch:'full'},
     {path:'login', component:AuthLayoutComponent},
     {path:'about', component:AboutComponent},
     {path:'growth', component:GrowthComponent}
